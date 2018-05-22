@@ -8,20 +8,33 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+protocol DetailDelegate: class {
+    func updateMovie(newmovie: Movie)
+}
 
+class DetailViewController: UIViewController {
     @IBOutlet weak var imageMovie: UIImageView!
     @IBOutlet weak var titleImage: UILabel!
     @IBOutlet weak var descriptionMovie: UITextView!
-    var movie: Movie!
+    var movie: Movie? {
+        didSet {
+         setupMovie()
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMovie()
     }
     func setupMovie() {
-        imageMovie.image = movie.image
-        titleImage.text =  movie.title
-        descriptionMovie.text = movie.resumen
+        loadViewIfNeeded()
+        imageMovie.image = movie?.image
+        titleImage.text =  movie?.title
+        descriptionMovie.text = movie?.resumen
     }
 }
 
+extension DetailViewController: DetailDelegate {
+    func updateMovie(newmovie: Movie) {
+        self.movie = newmovie
+    }
+}

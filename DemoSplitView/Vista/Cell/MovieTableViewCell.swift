@@ -9,17 +9,10 @@
 import UIKit
 
 class MovieTableViewCell: UITableViewCell {
-
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var titleMovie: UILabel!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     func setup(movie: Movie) {
         movieImage.image = movie.image
         titleMovie.text = movie.title
     }
-    
 }
